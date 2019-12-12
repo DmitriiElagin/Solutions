@@ -10,9 +10,9 @@ public class PhoneNumber {
     }
 
 public  static boolean validPhoneNumber(String s) {
-
-
-   return Pattern.matches("/(\\d\\d\\d/)",s);
+//Проверяет соответствует строки шаблону регулярного выражения
+    //\d{3} - числовые символы с указанием их колличества в фигурных скобках, \s - пробельный символ
+   return Pattern.matches("\\(\\d{3}\\)\\s\\d{3}-\\d{4}",s);
 
 }
 
