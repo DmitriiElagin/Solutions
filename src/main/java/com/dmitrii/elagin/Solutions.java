@@ -19,8 +19,30 @@ public class Solutions {
         return null;
     }
 
-    public static int reverse(int x) {
-        StringBuilder builder = new StringBuilder("" + x);
+    //Проверяет наличие в строке хороших и отсутствие плохих слов
+    public static boolean filterWords(String text) {
+        final String[] badWords = {"x", "y", "z"};
+        final String[] goodWords = {"a", "b", "c"};
+
+        return Arrays.stream(goodWords)
+                .anyMatch(text :: contains)
+               && Arrays.stream(badWords)
+                       .noneMatch(text :: contains);
+    }
+
+    //Переворачивает строку и делает первый символ заглавным
+    public static String reverseString(String s) {
+        String reverseString = new StringBuilder(s).reverse().toString();
+
+        reverseString = reverseString.substring(0, 1).toUpperCase()
+                + reverseString.substring(1).toLowerCase();
+
+        return  reverseString;
+    }
+
+    //Переворачивает цифры в целом числе в обратном порядке
+    public static int reverseInt(int x) {
+        final StringBuilder builder = new StringBuilder("" + x);
         builder.reverse();
 
         if (builder.charAt(builder.length() - 1) == '-') {
