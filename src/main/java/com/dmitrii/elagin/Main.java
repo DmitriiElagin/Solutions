@@ -45,15 +45,6 @@ public class Main {
         System.out.println(names);
         reverseArray(ints);
         System.out.println(Arrays.toString(ints));
-     int i = 4;
-        System.out.println(8/i);
-        System.out.println(9/i);
-        System.out.println(10/i);
-        System.out.println(11/i);
-
-        int x = 65536;
-        char c = (char) x;
-
     }
 
 }
