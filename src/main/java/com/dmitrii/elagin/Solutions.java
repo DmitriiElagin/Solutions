@@ -8,7 +8,6 @@ public class Solutions {
 
     //Находит индексы 2-х элементов массива, суммой которых является target
     public static int[] twoSum(int[] numbers, int target) {
-
         for (int i = 0; i < numbers.length; i++) {
             for (int j = i + 1; j < numbers.length; j++) {
                 if (numbers[i] + numbers[j] == target) {
@@ -50,21 +49,26 @@ public class Solutions {
             builder.insert(0, '-');
         }
 
-        try {
-            return Integer.parseInt(builder.toString());
-        } catch (NumberFormatException ex) {
-            return 0;
-        }
+        return Integer.parseInt(builder.toString());
     }
 
     public static String multiTable(int num) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
         for (int i = 1; i <= 10; i++) {
-            sb.append(String.format("%d * %d = %d", i, num, i * num));
+            builder
+                    .append(i)
+                    .append(" * ")
+                    .append(num)
+                    .append(" = ")
+                    .append(i * num);
+
+            if (i < 10) {
+                builder.append('\n');
+            }
 
         }
-        return sb.toString().trim();
+        return builder.toString();
     }
 
     //Удаляет весь текст, закомментированный  указанными в аргументе символами
@@ -76,7 +80,6 @@ public class Solutions {
 
     //Проверяет, являются ли строки анограммой
     public static boolean isAnagram(String s1, String s2) {
-
         char[] a1 = s1.toLowerCase().toCharArray();
         char[] a2 = s2.toLowerCase().toCharArray();
         Arrays.sort(a1);
@@ -95,36 +98,45 @@ public class Solutions {
 //     result+word.charAt()
 //     }
         return (word.length() % 2 > 0) ? "" + word.charAt(word.length() / 2) : ""
-                        + word.charAt(word.length() / 2 - 1) + "" + word.charAt(word.length() / 2);
+                + word.charAt(word.length() / 2 - 1) + "" + word.charAt(word.length() / 2);
     }
 
-    // Получить цвет свотофора по времени
+    /**
+     * Возвращает строку с текущим цветом световора исходя из указанного колличества пройденных минут
+     * При условии, что первым 3 минуты горит зеленый, далее 1 минуту горит желтый, и 1 минуту горит красный
+     *
+     * @param min - колличество минут, прошедших с начала работы светофора
+     * @return Строковое представление цвета светофора
+     */
     public static String getColorByMinutes(double min) {
         String result = "";
+
         double tmp = min % 5.0f;
-        System.out.println(tmp);
+
         if ((tmp >= 0) && (tmp < 3.0f)) {
-            result = "зеленый";
+            result = "green";
         }
+
         if ((tmp >= 3.0f) && (tmp < 4.0f)) {
-            result = "желтый";
+            result = "yellow";
         }
 
         if ((tmp >= 4.0f) && (tmp < 5.0f)) {
-            result = "красный";
+            result = "red";
         }
+
         return result;
     }
 
     public static <T> boolean hasDuplicates(T[] array) {
-
-        Set<T> set = new HashSet<>();
+        final Set<T> set = new HashSet<>();
 
         for (T item : array) {
             if (!set.add(item)) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -138,7 +150,6 @@ public class Solutions {
 //        }
 //        
 //        return res;
-
         return n * n * n;
     }
 
@@ -160,49 +171,28 @@ public class Solutions {
         return res;
     }
 
-    public static int[] deleteNth(int[] elements, int maxOccurrences) {
-        HashMap<Integer, Integer> occurMap = new HashMap<>();
-        
-//        LinkedList<Integer> list = new LinkedList<>();
-        
-       return Arrays.stream(elements).filter(i -> {
-            
-           occurMap.merge(i, 1, Integer::sum);
-             
-             return occurMap.get(i) <= maxOccurrences;
+    /**
+     * Удаляет лишние дубликаты чисел из массива, колличество которых превышает указанное число вхождений
+     *
+     * @param ints           Массив целых цисел
+     * @param maxOccurrences Допустимое колличество вхождений каждого числа
+     * @return массив целых чисел, отфильтрованный от лишних дубликатов
+     */
+    public static int[] deleteNth(int[] ints, int maxOccurrences) {
+        final HashMap<Integer, Integer> occurMap = new HashMap<>();
+
+        return Arrays.stream(ints).filter(i -> {
+            occurMap.merge(i, 1, Integer::sum);
+
+            return occurMap.get(i) <= maxOccurrences;
 
         }).toArray();
-//
-//        if (maxOccurrences > 0) {
-//            for (int i : elements) {
-//
-//                if (occurMap.containsKey(i)) {
-//                    int occurNum = occurMap.get(i);
-//                    if (occurNum < maxOccurrences) {
-//                        occurMap.put(i, ++occurNum);
-//                        list.add(i);
-//                    }
-//
-//                } else {
-//                    occurMap.put(i, 1);
-//                    list.add(i);
-//                }
-//
-//            }
-//        }
-//
-//        int res[] = new int[list.size()];
-//        for (int i = 0; i < list.size(); i++) {
-//            res[i] = list.get(i);
-//        }
-//
-//        return res;
 
     }
 
     public static void moveZerosToEnd(int[] data) {
-        for(int i = 0, n = data.length; i < n -1; i++) {
-            if(data[i] == 0) {
+        for (int i = 0, n = data.length; i < n - 1; i++) {
+            if (data[i] == 0) {
                 n--;
                 System.arraycopy(data, i + 1, data, i, n - i);
                 data[n] = 0;
@@ -210,19 +200,21 @@ public class Solutions {
         }
     }
 
-    public static void deleteFirstCharAndReverseOrderedList(List<String> names) {
-        names.replaceAll(s -> s.substring(1));
-        names.sort(Comparator.reverseOrder());
+    public static void deleteFirstCharAndReverseOrderedList(List<String> list) {
+        for (int i = 0, n = list.size() - 1; i <= n; i++, n--) {
+            final String tmp = list.get(i);
+            list.set(i, list.get(n));
+            list.set(n, tmp);
+        }
+
+        list.replaceAll(l -> l.substring(1));
     }
 
     public static <T> void reverseArray(T[] data) {
-        for(int i = 0, n = data.length -1; i <= n; i++, n--) {
+        for (int i = 0, n = data.length - 1; i <= n; i++, n--) {
             T temp = data[i];
             data[i] = data[n];
             data[n] = temp;
         }
     }
-    
-
-
 }
