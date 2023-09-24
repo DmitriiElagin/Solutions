@@ -217,4 +217,37 @@ public class Solutions {
             data[n] = temp;
         }
     }
+
+    public static int countIslands(byte[][] map) {
+        int islandCount = 0;
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                if (map[i][j] == 1) {
+                    islandCount++;
+                    markIsland(map, i, j);
+                }
+            }
+        }
+        return islandCount;
+    }
+
+    private static void markIsland(byte[][] map, int x, int y) {
+        if (map[x][y] == 1) {
+            map[x][y] = 0;
+            if (x + 1 < map.length) {
+                markIsland(map, x + 1, y);
+            }
+            if (x > 0) {
+                markIsland(map, x - 1, y);
+            }
+
+            if (y + 1 < map[x].length) {
+                markIsland(map, x, y + 1);
+            }
+
+            if (y > 0) {
+                markIsland(map, x, y - 1);
+            }
+        }
+    }
 }

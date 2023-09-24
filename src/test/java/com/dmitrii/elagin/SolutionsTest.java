@@ -128,4 +128,49 @@ class SolutionsTest {
         assertEquals("es", Solutions.getMiddle("test"));
         assertEquals("s", Solutions.getMiddle("test2"));
     }
+
+    @Test
+    void countIslands() {
+        byte[][] map1 = {
+                {0, 0, 0, 0, 0, 0},
+                {0, 1, 1, 0, 0, 0},
+                {0, 1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 1, 0},
+                {0, 0, 1, 1, 1, 1},
+                {0, 0, 1, 1, 0, 0}
+        };
+
+        byte[][] map2 = {
+                {0, 0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0},
+                {1, 0, 1, 1, 1, 1},
+                {1, 0, 1, 0, 0, 1},
+                {0, 0, 1, 0, 1, 1},
+                {0, 0, 1, 1, 1, 0}
+        };
+
+        byte[][] map3 = {
+                {0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0},
+                {0, 0, 1, 1, 1, 0},
+                {0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 1, 1, 0}
+        };
+
+        byte[][] map4 = {
+                {1, 0, 1, 0, 0, 1},
+                {1, 1, 0, 0, 1, 1},
+                {0, 0, 0, 0, 0, 0},
+                {0, 0, 1, 0, 1, 0},
+                {1, 0, 0, 0, 0, 1},
+                {1, 1, 0, 0, 1, 1}
+        };
+
+        assertEquals(2, Solutions.countIslands(map1));
+        assertEquals(3, Solutions.countIslands(map2));
+        assertEquals(1, Solutions.countIslands(map3));
+        assertEquals(7, Solutions.countIslands(map4));
+
+    }
 }
